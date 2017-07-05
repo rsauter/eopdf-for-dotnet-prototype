@@ -1,0 +1,14 @@
+c:\users\rsauter.nela\documents\visual studio 2017\Projects\EOPoc\EOPoc\bin\Debug\EOPoc.exe.config
+c:\users\rsauter.nela\documents\visual studio 2017\Projects\EOPoc\EOPoc\bin\Debug\EOPoc.exe
+c:\users\rsauter.nela\documents\visual studio 2017\Projects\EOPoc\EOPoc\bin\Debug\EOPoc.pdb
+c:\users\rsauter.nela\documents\visual studio 2017\Projects\EOPoc\EOPoc\bin\Debug\EO.Base.dll
+c:\users\rsauter.nela\documents\visual studio 2017\Projects\EOPoc\EOPoc\bin\Debug\EO.Pdf.dll
+c:\users\rsauter.nela\documents\visual studio 2017\Projects\EOPoc\EOPoc\bin\Debug\EO.Web.dll
+c:\users\rsauter.nela\documents\visual studio 2017\Projects\EOPoc\EOPoc\bin\Debug\EO.WebBrowser.dll
+c:\users\rsauter.nela\documents\visual studio 2017\Projects\EOPoc\EOPoc\bin\Debug\EO.WebEngine.dll
+c:\users\rsauter.nela\documents\visual studio 2017\Projects\EOPoc\EOPoc\bin\Debug\IEC16022Sharp.dll
+c:\users\rsauter.nela\documents\visual studio 2017\Projects\EOPoc\EOPoc\bin\Debug\TallComponents.PDF.Kit.dll
+c:\users\rsauter.nela\documents\visual studio 2017\Projects\EOPoc\EOPoc\bin\Debug\IEC16022Sharp.pdb
+c:\users\rsauter.nela\documents\visual studio 2017\Projects\EOPoc\EOPoc\obj\Debug\EOPoc.csprojResolveAssemblyReference.cache
+c:\users\rsauter.nela\documents\visual studio 2017\Projects\EOPoc\EOPoc\obj\Debug\EOPoc.exe
+c:\users\rsauter.nela\documents\visual studio 2017\Projects\EOPoc\EOPoc\obj\Debug\EOPoc.pdb

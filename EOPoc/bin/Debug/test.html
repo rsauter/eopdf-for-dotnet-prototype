@@ -1,0 +1,549 @@
+<html style="" class=" js flexbox flexboxlegacy canvas canvastext webgl no-touch geolocation postmessage no-websqldatabase indexeddb hashchange history draganddrop websockets rgba hsla multiplebgs backgroundsize borderimage borderradius boxshadow textshadow opacity cssanimations csscolumns cssgradients no-cssreflections csstransforms csstransforms3d csstransitions fontface generatedcontent video audio localstorage sessionstorage webworkers applicationcache svg inlinesvg smil svgclippaths"><head>
+    <meta charset="utf-8">
+    <title>Quickline Konfigurator</title>
+    <meta name="description" content="">
+    <meta http-equiv="cache-control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="expires" content="0">
+    <link rel="shortcut icon" href="/Content/images/favicon_Quickline.ico">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <script async="" src="https://www.googletagmanager.com/gtm.js?id=GTM-TJ8LXZR" style=""></script><script src="https://maps.googleapis.com/maps/api/js?&amp;sensor=false" type="text/javascript"></script>
+    <script src="/script?v=X51O0-uNwe2Kieqns6k-HQ2URAFaCaTNYndoZQdbQh41"></script>
+
+    <link href="/Content/bundle/style?v=1O0zeXRqW9qiYQa41MDv8NsVuK9gku1XubB6uwlhTHY1" rel="stylesheet">
+
+
+    <script>
+        window.dataLayer = window.dataLayer || [];
+    </script>
+    
+    <!-- Google Tag Manager -->
+<script>
+(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-TJ8LXZR');</script>
+<!-- End Google Tag Manager -->
+
+        <script type="text/javascript" src="http://login.alpha.quickline.ch/scripts/isb" data-clientid="QuicklineOrder" data-isb-url="http://login.alpha.quickline.ch/PortalHeader" data-isb-style-url="http://login.alpha.quickline.ch/styles/isb" data-accesstoken="00000000-0000-0000-0000-000000000000" data-loginreturnurl="http://order.quickline.ch" data-logoutreturnurl="http://order.quickline.ch/LogOff"></script>
+<script>
+jQuery.noConflict();          ORDER.application.init("http://order.local.quickline.ch/");
+      </script>
+<link type="text/css" id="quicklineISB-1499171497710-styles" rel="stylesheet" media="all" href="http://login.alpha.quickline.ch/styles/isb"><script type="text/javascript" charset="UTF-8" src="https://maps.googleapis.com/maps-api-v3/api/js/29/9/intl/de_ALL/common.js"></script><script type="text/javascript" charset="UTF-8" src="https://maps.googleapis.com/maps-api-v3/api/js/29/9/intl/de_ALL/util.js"></script><script type="text/javascript" charset="UTF-8" src="https://maps.googleapis.com/maps-api-v3/api/js/29/9/intl/de_ALL/stats.js"></script></head>
+<body cz-shortcut-listen="true"><header id="inter-site-bar" data-isb="quicklineISB-1499171497710-isb" class="inter-site-bar folded" role="menubar"></header>
+<!-- Google Tag Manager (noscript) -->
+<noscript>
+    <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TJ8LXZR"
+            height="0" width="0" style="display:none;visibility:hidden"></iframe>
+</noscript>
+<!-- End Google Tag Manager (noscript) -->
+<script type="text/javascript">
+    $(function() {
+        $("#globalErrorsContainer").hide();
+    });
+    $(document).ajaxError(function (event, jqxhr, settings, thrownError) {
+        $("#globalErrorsContainer").show();
+        ORDER.application.toggleBusyIndicator(false);
+        //automatically and smoothly scroll to alert if it's placed outside visible area
+        $('html, body').animate({ scrollTop: $("#globalErrorsContainer").offset().top }, 1000);
+        $("#globalErrorsItems").text(jqxhr.responseText);
+        
+    });
+
+</script>
+<div class="container" id="globalErrorsContainer" style="display: block;">
+    <div id="globalErrors" class="alert-wrapper">
+        <div id="globalErrorsItems" class="alert alert-danger">
+        </div>
+    </div>
+</div>
+
+
+
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        renderCurrentStep();
+    });
+
+    function next() {
+        ORDER.application.toggleBusyIndicator(true);
+        $.ajax({
+            type: 'POST',
+            url: 'http://order.local.quickline.ch/OrderProcess/Next?sessionId=e6e95f6e-9777-9bad-1793-52fb0d491bdc',
+            success: function (data) {
+                renderCurrentStep(data).then(function () {
+                    ORDER.application.toggleBusyIndicator(false);
+                });
+            },
+            error: function () {
+                ORDER.application.toggleBusyIndicator(false);
+            }
+        });
+    }
+
+    function nextWithId(sessionId) {
+        $.ajax({
+            type: 'POST',
+            url: 'http://order.local.quickline.ch/OrderProcess/Next?sessionId=e6e95f6e-9777-9bad-1793-52fb0d491bdc' + '?sessionId=' + sessionId,
+            success: function () {
+                renderCurrentStep();
+            }
+        });
+    }
+
+    function previous() {
+        ORDER.application.toggleBusyIndicator(true);
+        $.ajax({
+            type: 'POST',
+            url: 'http://order.local.quickline.ch/OrderProcess/Previous?sessionId=e6e95f6e-9777-9bad-1793-52fb0d491bdc',
+            success: function (data) {
+                    renderCurrentStep(data).then(function(){
+                        ORDER.application.toggleBusyIndicator(false);
+                    });
+            },
+            error: function () {
+                ORDER.application.toggleBusyIndicator(false);
+            }
+        });
+    }
+
+    function renderCurrentStep(data) {
+
+        var deferred = $.Deferred();
+
+        if (data) {
+            $("#contentPlaceholder").html(data);
+            deferred.resolve();
+        } else {
+            $("#contentPlaceholder").load('http://order.local.quickline.ch/OrderProcess/GetCurrentStep?sessionId=e6e95f6e-9777-9bad-1793-52fb0d491bdc', null, function() {
+                deferred.resolve();
+            });
+        }
+
+        // Google Tag Manager
+        ORDER.Gtm.PushDatalayer('http://order.local.quickline.ch/Gtm?sessionId=e6e95f6e-9777-9bad-1793-52fb0d491bdc');
+
+        return deferred.promise();
+    }
+</script>
+<div id="contentPlaceholder"><script>
+    dataLayer.push({"event":"pageRendered","pageTitle":"Bestätigung","userRole":"NewCustomer","transactionId":"WorkflowID: 538655","transactionPaymentType":"Rechnung","transactionTotal":60.00,"transactionTax":0,"transactionShipping":0,"transactionPlace":"Bäriswil BE","transactionCountry":"Schweiz"})
+</script>
+
+<script type="text/javascript">
+// Conversion Name: Quickline_Lead
+var ebSession = '[SessionID]';
+var ebRand = Math.random()+'';
+ebRand = ebRand * 1000000;
+    //<![CDATA[
+$( "#bsServing" ).attr('src',"HTTPS://bs.serving-sys.com/Serving/ActivityServer.bs?cn=as&ActivityID=825478&rnd=" + ebRand + "&Session=e6e95f6e-9777-9bad-1793-52fb0d491bdc");
+//]]>
+</script>
+
+<script>
+    $(document).ready(function () {
+        ORDER.tools.registerCartAffix();
+        ORDER.application.getCart();
+    });
+    var showState = 0;
+    var intervalId;
+    var intervalOccurence = 0;
+    var intervalMaxOccurence = 2000;
+
+    var confirmationPage = {        
+        triggerConfirmationEvent: function(errorCode, bundleContractId, requestId) {
+            console.log("Back To Qmc");
+            parent.postMessage({
+                errorCode: errorCode,
+                bundleContractId: bundleContractId
+            }, "*");
+            //parent.$("#orderProcessIframe").trigger("orderProcessEvent", {
+            //    errorCode: errorCode,
+            //    bundleContractId: bundleContractId,
+            //    requestId: requestId
+            //});
+        }
+    };
+
+    function RefreshWfState() {
+        // Serialize your form and add your location
+        var formdata = $("#inetoptionform").serialize();
+        intervalOccurence++;
+        if (intervalOccurence > intervalMaxOccurence) {
+            clearInterval(intervalId);
+        }
+        $.ajax({
+            type: 'POST',
+            url: 'http://order.local.quickline.ch/Confirmation/RefreshWfData?sessionId=e6e95f6e-9777-9bad-1793-52fb0d491bdc',
+            data: formdata,
+            success: function (data) {
+                if (data.length > 10)
+                    {
+                $("#WfState").html(data);
+                console.info("Refresh Wf State");
+                    } else {
+                    console.info("Refresh Wf State - no objects found");
+                    clearInterval(intervalId);
+            }
+            }
+        });
+    }
+    if(showState == 1)
+    {
+         intervalId = setInterval(RefreshWfState, 4000);
+    }
+    
+    
+</script>
+<img id="bsServing" style="border:0" src="HTTPS://bs.serving-sys.com/Serving/ActivityServer.bs?cn=as&amp;ActivityID=825478&amp;rnd=48804.419638665&amp;Session=e6e95f6e-9777-9bad-1793-52fb0d491bdc" width="1" height="1">
+<div class="container">
+<div class="page-header">
+    <h2>Bestätigung</h2>
+</div>
+
+<div class="alert-wrapper" id="alert-wrapper-id"><div class="alert alert-info">Mit dem XL-Deal erhalten Sie 1 Jahr lang die volle XL Leistung für nur CHF 60.–/Mt!<br></div></div><script>$('html, body').animate({scrollTop: $("#alert-wrapper-id").offset().top}, 1000);</script>
+
+<div class="row">
+<div class="col-md-8">
+
+    <div class="form-group">
+        <div class="col-ss-12 col-xs-10">
+            Vielen Dank für Ihre Bestellung! Unten sehen Sie Ihre Bestellbestätigung, die wir Ihnen auch an Ihre E-Mail-Adresse gesendet haben. Wir werden uns in Kürze bei Ihnen melden, um die genauen Details zur Installation  und die definitive Verfügbarkeit abklären zu können.
+        </div>
+
+    </div>
+    <div class="form-group">
+
+        <div class="col-ss-12 col-xs-4">
+            <label>Ihre Bearbeitungsnummer</label>
+        </div>
+        <div class="col-ss-12 col-xs-6">
+            538655
+        </div>
+    </div>
+
+
+
+
+
+    <legend>Zusammenfassung</legend>
+    <div class="form-group">
+
+        <div class="col-ss-12 col-xs-4">
+            <label>Kundendaten</label>
+        </div>
+        <div class="col-ss-12 col-xs-6">
+            Herr Test I TraxisNewUrl, 12.02.1978<br>Nationalität Schweiz<br>Mobile Privat +41 79 437 78 43
+        </div>
+    </div>
+    <div class="form-group">
+
+        <div class="col-ss-12 col-xs-4">
+            <label>Installationsadresse</label>
+        </div>
+        <div class="col-ss-12 col-xs-6">
+            Hubelweg 3B<br>3323 Bäriswil BE
+        </div>
+    </div>
+
+
+    <div class="form-group">
+
+        <div class="col-ss-12 col-xs-4">
+            <label>Lieferart</label>
+        </div>
+        <div class="col-ss-12 col-xs-6">
+            Vor Ort Installation und Versand
+        </div>
+    </div>
+
+        <div class="form-group">
+
+            <div class="col-ss-12 col-xs-4">
+                <label>Lieferadresse</label>
+            </div>
+            <div class="col-ss-12 col-xs-6">
+                Herr Test I TraxisNewUrl<br>Hubelweg 3B<br>3323 Bäriswil BE
+            </div>
+        </div>
+
+    <div class="form-group">
+
+        <div class="col-ss-12 col-xs-4">
+            <label>Zahlungsart</label>
+        </div>
+        <div class="col-ss-12 col-xs-6">
+            Rechnung
+        </div>
+    </div>
+    <div class="form-group">
+    <div class="col-ss-12 col-xs-4">
+            <label>Serviceübersicht</label>            
+    </div>
+    <div class="col-ss-12 col-xs-8 services">
+        <b>Kombi-Angebot:</b>
+        
+            XL-Deal
+                <div class="alert alert-info">Mit dem XL-Deal erhalten Sie 1 Jahr lang die volle XL Leistung für nur CHF 60.–/Mt!</div>
+                </div>
+
+    <div class="col-ss-12 col-xs-4">
+    </div>
+    <div class="col-ss-12 col-xs-8 services">
+        <b>Internet:</b>
+        
+            Internet XL-Deal (400 / 40 Mbit/s)
+                </div>
+
+    <div class="col-ss-12 col-xs-4">
+    </div>
+    <div class="col-ss-12 col-xs-8 services">
+        <b>Cloud:</b>
+        
+            Cloud 1 TB
+                </div>
+
+    <div class="col-ss-12 col-xs-4">
+    </div>
+    <div class="col-ss-12 col-xs-8 services">
+        <b>Festnetz-Telefonie:</b>
+        
+            Swiss Flat 031 530 22 64
+                </div>
+
+    <div class="col-ss-12 col-xs-4">
+    </div>
+    <div class="col-ss-12 col-xs-8 services">
+        <b>DTV:</b>
+        
+            Quickline TV
+                            <ul class="ql-list">
+                        <li>Grundangebot</li>
+                        <li>Entertainment XL-Deal</li>
+                        <li>Plus</li>
+                </ul>
+    </div>
+
+    </div>
+    <div class="form-group">
+        <div class="col-ss-12 col-xs-4">
+            <label>Aufschaltung Wunschtermin</label>
+        </div>
+        <div class="col-ss-12 col-xs-6">
+            Internet am 07.07.2017<br>Cloud 1 TB am 07.07.2017<br>Festnetz-Telefonie am 07.07.2017<br>Quickline TV am 07.07.2017
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-ss-12 col-xs-4">
+            <label>Benachrichtigung</label>
+        </div>
+        <div class="col-ss-12 col-xs-6">
+            via SMS, via E-Mail
+        </div>
+    </div>
+            <div class="form-group">
+            <div class="col-ss-12 col-xs-4">
+                <label>Bemerkung</label>
+            </div>
+            <div class="col-ss-12 col-xs-6">
+            </div>
+        </div>
+</div>
+
+<!-- Sticky footer on mobile -->
+<div class="col-ss-12 col-md-4 sticky-footer">
+
+    <!-- Scroll sticky cart sidebar on tablet / desktop -->
+    <div id="scroll-sticky-element" class="affix-top" style="width: 360px;">
+            <div class="panel">
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <h2>Haben Sie Fragen?</h2>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <label>Kundendienst</label>
+                        </div>
+                        <div class="col-ss-12 col-xs-12">
+                                <h2>0800 84 10 20</h2>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12">
+                            Mo-Fr: 8.00 bis 21.00, Sa: 10.00 bis 19.00
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <div class="row">
+            <div class="col-ss-12 col-xs-12" id="cartPlaceholder">
+
+<script>
+    $(document).ready(function() {
+        ORDER.tools.registerAffixForceTop(0);
+        ORDER.tools.toggleAffixByWindowSize(0);
+    });
+</script>
+
+<div class="panel cart">
+    <div class="panel-body">
+        <div class="row cart__line">
+            <div class="col-xs-8 cart__line__text">
+                <h2>Ihre Bestellung</h2>
+            </div>
+            <div class="col-xs-4">
+                <div class="visible-xs-block visible-sm-block">
+                    <span class="sticky-footer__open ql-icon-glyphicon glyphicon glyphicon-menu-up" aria-hidden="true"></span>
+                </div>
+                <div class="visible-xs hidden-footer-sticky">
+                    <img class="sticky-footer__close" src="/Content/images/close-icon@2x.png">
+                </div>
+            </div>
+        </div>
+        <!-- Monthly price area-->
+            <div class="row cart__line hidden-footer-sticky">
+                <div class="col-xs-8 cart__line__text">XL-Deal<span class="label label-product-free label-float-right"></span></div>
+                <div class="col-xs-4 text-right cart__line__price">CHF 60.00
+</div>
+            </div>
+            <div class="row cart__line hidden-footer-sticky">
+                <div class="col-xs-8 cart__line__text">Internet XL-Deal<span class="label label-product-free label-float-right"></span></div>
+                <div class="col-xs-4 text-right cart__line__price">✓
+</div>
+            </div>
+                <div class="row cart__line hidden-footer-sticky">
+                    <div class="col-xs-8 cart__line__text indentcart">WLAN-Modem</div>
+                    <div class="col-xs-4 text-right cart__line__price">✓
+</div>
+                </div>
+            <div class="row cart__line hidden-footer-sticky">
+                <div class="col-xs-8 cart__line__text">Cloud<span class="label label-product-free label-float-right"></span></div>
+                <div class="col-xs-4 text-right cart__line__price">✓
+</div>
+            </div>
+                <div class="row cart__line hidden-footer-sticky">
+                    <div class="col-xs-8 cart__line__text indentcart">Cloud 1 TB</div>
+                    <div class="col-xs-4 text-right cart__line__price">✓
+</div>
+                </div>
+            <div class="row cart__line hidden-footer-sticky">
+                <div class="col-xs-8 cart__line__text">Swiss Flat<span class="label label-product-free label-float-right"></span></div>
+                <div class="col-xs-4 text-right cart__line__price">✓
+</div>
+            </div>
+            <div class="row cart__line hidden-footer-sticky">
+                <div class="col-xs-8 cart__line__text">Quickline TV<span class="label label-product-free label-float-right"></span></div>
+                <div class="col-xs-4 text-right cart__line__price">✓
+</div>
+            </div>
+        <div class="row cart__line cart__line--total">
+            <div class="col-xs-8 cart__line__text">Total monatliche Kosten</div>
+            <div class="col-xs-4 text-right cart__line__price">CHF 60.00
+</div>
+            <div class="col-xs-12 hidden-footer-sticky">
+                <div class="cart__line__separator"></div>
+            </div>
+        </div>
+            <!-- One time price area-->
+                <div class="row cart__line hidden-footer-sticky">
+                        <div class="col-xs-8 cart__line__text">Quickline Aktivierung</div>
+                    <div class="col-xs-4 text-right cart__line__price">CHF 79.00
+</div>
+
+
+                </div>
+
+            <div class="row cart__line cart__line--total">
+                <div class="col-xs-8 cart__line__text">Total einmalige Kosten</div>
+                <div class="col-xs-4 text-right cart__line__price">CHF 79.00
+</div>
+            </div>
+
+            <div class="row cart__line hidden-footer-sticky">
+                <div class="col-xs-12">
+                    <div class="cart__line__separator"></div>
+                </div>
+                <div class="col-xs-12 cart__line__info">
+                    Alle Preise inkl. MwSt. und exkl. Digitalanschlusskosten
+                </div>
+            </div>
+
+ 
+</div>
+</div>
+</div>
+
+        </div>
+    </div>
+</div>
+
+<!-- The sticky-footer-spacer helps to scroll the whole content -->
+<div id="sticky-footer-spacer"></div>
+</div>
+</div>
+
+</div>
+
+
+<div id="loader" class="loading-overlay" style="display: none;">
+    <div id="loader-icon" class="loading-overlay__content">
+        <div id="floatingCirclesG">
+            <div class="f_circleG" id="frotateG_01"></div>
+            <div class="f_circleG" id="frotateG_02"></div>
+            <div class="f_circleG" id="frotateG_03"></div>
+            <div class="f_circleG" id="frotateG_04"></div>
+            <div class="f_circleG" id="frotateG_05"></div>
+            <div class="f_circleG" id="frotateG_06"></div>
+            <div class="f_circleG" id="frotateG_07"></div>
+            <div class="f_circleG" id="frotateG_08"></div>
+        </div>
+        <div class="loading__text">Laden...</div>
+    </div>
+</div>
+
+
+<!-- Visual Studio Browser Link -->
+<script type="application/json" id="__browserLink_initializationData">
+    {"appName":"Firefox","requestId":"80162d0d037a4f4cac34856e24c3e16e"}
+</script>
+<script type="text/javascript" src="http://localhost:54591/5faf7e21709a4a3db899f06d115a3952/browserLink" async="async"></script>
+<!-- End Browser Link -->
+
+
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $.validator.addMethod(
+            'date',
+            function (value, element) {
+                var check = false;
+                var re = /^\d{1,2}\.\d{1,2}\.\d{4}$/;
+                if (re.test(value)) {
+                    var adata = value.split('.');
+                    var dd = parseInt(adata[0], 10);
+                    var mm = parseInt(adata[1], 10);
+                    var yyyy = parseInt(adata[2], 10);
+                    var xdata = new Date(yyyy, mm - 1, dd);
+                    if ((xdata.getFullYear() === yyyy) && (xdata.getMonth() === mm - 1) && (xdata.getDate() === dd))
+                        check = true;
+                    else
+                        check = false;
+                } else
+                    check = false;
+                return this.optional(element) || check;
+            },
+            "Das Datum ist ungültig."
+        );
+    });
+</script>
+
+
+<script type="text/javascript" id="">console.log("Produktauswahl Gtm Tag triggered");</script><script type="text/javascript" id="">console.log("OptionenPage Gtm Tag triggered");</script></body></html>
