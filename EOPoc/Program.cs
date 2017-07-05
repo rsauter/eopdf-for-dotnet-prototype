@@ -22,14 +22,14 @@ namespace EOPoc
             var html = LoadHtmlString();
             using (var converterStream = new FileStream($@"temp_{DateTime.Now.Ticks}.pdf", FileMode.CreateNew))
             {
-                Runtime.AddLicense(
-                    "6q3s9vbpuG3YzvMYwIiq8wIA54++1v7utWy+687ou2jq7fgZ4K3s9vbpjEOz" +
-                    "s/0U4p7l9/bpjEN14+30EO2s3MKetZ9Zl6TNF+ic3PIEEMidtbzE3bZssLbG" +
-                    "3rB1pvD6DuSn6unaD71GgaSxy5914+30EO2s3OnP566l4Of2GfKe3MKetZ9Z" +
-                    "l6TNDOul5vvPuIlZl6Sxy59Zl8DyD+NZ6/0BELxbvNO/++OfmaQHEPGs4PP/" +
-                    "6KFqrrLBzZ9otZGby59Zl8DADOul5vvPuIlZl6Sx5+6r2+kD9O2f5qT1DPOe" +
-                    "tKbF2rBxprbB3LVbl/cGDcSx5+0DEPJ668Gz365qr7PD27BwmaQHEPGs4PP/" +
-                    "6KFqraax2r1GgaSxy5916u34GeA=");
+                //Runtime.AddLicense(
+                //    "6q3s9vbpuG3YzvMYwIiq8wIA54++1v7utWy+687ou2jq7fgZ4K3s9vbpjEOz" +
+                //    "s/0U4p7l9/bpjEN14+30EO2s3MKetZ9Zl6TNF+ic3PIEEMidtbzE3bZssLbG" +
+                //    "3rB1pvD6DuSn6unaD71GgaSxy5914+30EO2s3OnP566l4Of2GfKe3MKetZ9Z" +
+                //    "l6TNDOul5vvPuIlZl6Sxy59Zl8DyD+NZ6/0BELxbvNO/++OfmaQHEPGs4PP/" +
+                //    "6KFqrrLBzZ9otZGby59Zl8DADOul5vvPuIlZl6Sx5+6r2+kD9O2f5qT1DPOe" +
+                //    "tKbF2rBxprbB3LVbl/cGDcSx5+0DEPJ668Gz365qr7PD27BwmaQHEPGs4PP/" +
+                //    "6KFqraax2r1GgaSxy5916u34GeA=");
 
                 HtmlToPdfOptions options = new EO.Pdf.HtmlToPdfOptions();
                 options.OutputArea = new RectangleF(1f, 1.9f, 6.5f, 9f);
